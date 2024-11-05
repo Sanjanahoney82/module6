@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Webpage</title>
+    <style>
+        /* Basic reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #E6E6FA; /* Light Purple */
+            color: #333;
+            text-align: center;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+        }
+
+        header h1 {
+            color: #5D3FD3; /* Dark Purple for the header */
+            margin-bottom: 20px;
+            font-size: 32px;
+        }
+
+        #content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 40px;
+            width: 100%;
+            max-width: 800px; /* Restrict content width for readability */
+        }
+
+        .section-title {
+            font-size: 28px;
+            color: #4B0082; /* Indigo for section titles */
+            margin-bottom: 10px;
+        }
+
+        .description {
+            font-size: 18px;
+            color: #333;
+            max-width: 700px;
+            margin: 10px auto;
+            line-height: 1.6;
+        }
+
+        /* Button styling */
+        button {
+            padding: 12px 25px;
+            font-size: 18px;
+            background-color: #A8E6CF; /* Light Green initially */
+            color: #333;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            transform: scale(1.05); /* Slight zoom effect */
+        }
+
+        /* Input field styling */
+        input[type="text"] {
+            padding: 12px;
+            font-size: 16px;
+            margin: 15px 0;
+            width: 100%;
+            max-width: 300px; /* Limit width of the input */
+            border: 2px solid #A8E6CF; /* Light Green border */
+            border-radius: 8px;
+            transition: border-color 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        input[type="text"]:focus {
+            border-color: #81C784; /* Darker green on focus */
+            outline: none;
+        }
+
+        footer {
+            margin-top: 40px;
+            font-size: 14px;
+            color: #777;
+            transition: color 0.5s ease-in-out;
+        }
+
+        /* Footer text color */
+        footer p {
+            color: #5D3FD3; /* Dark Purple */
+        }
+
+        /* Form container */
+        .form-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+            width: 100%;
+            max-width: 350px; /* Restrict the form width */
+        }
+
+        /* Image styling for the lion with multiple hover effects */
+        #lionImage {
+            max-width: 300px;
+            transition: transform 0.3s ease, filter 0.3s ease, box-shadow 0.3s ease, rotate 0.3s ease;
+            border-radius: 10px;
+        }
+
+        #lionImage:hover {
+            /* Zoom in effect */
+            transform: scale(1.2); /* Zoom in effect */
+            
+            /* Brightness effect */
+            filter: brightness(1.3); /* Increase brightness */
+            
+            /* Grayscale effect */
+            filter: grayscale(50%); /* Change to grayscale */
+            
+            /* Blur effect */
+            filter: blur(4px); /* Add blur effect */
+            
+            /* Rotate effect */
+            transform: rotate(10deg); /* Slight rotation */
+
+            /* Shadow effect */
+            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.5); /* Add shadow on hover */
+        }
+
+        /* Responsive media query for smaller screens */
+        @media (max-width: 600px) {
+            .section-title {
+                font-size: 24px;
+            }
+
+            .description {
+                font-size: 16px;
+            }
+
+            button {
+                font-size: 16px;
+                padding: 10px 20px;
+            }
+
+            input[type="text"] {
+                font-size: 14px;
+                padding: 10px;
+                width: 80%;
+            }
+
+            #lionImage {
+                max-width: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome to My Interactive Webpage</h1>
+    </header>
+
+    <section id="content">
+        <!-- Section with information about the color button -->
+        <div>
+            <h2 class="section-title">ITC505</h2>
+            <p class="description">
+                
+            </p>
+            <button id="colorButton" onclick="changeColor()">Click Me to Change Color</button>
+        </div>
+
+        <!-- Section with input field and form submission -->
+        <div>
+            <h2 class="section-title">Submit Your Text</h2>
+            <p class="description">
+                
+            </p>
+            <div class="form-container">
+                <label for="userInput">Enter Text:</label>
+                <input type="text" id="userInput" placeholder="Type something...">
+                <!-- Submit button that changes color on each click -->
+                <button id="submitButton" onclick="submitText()">Submit</button>
+            </div>
+        </div>
+
+        <!-- Lion image section -->
+        <div>
+            <h2 class="section-title">Lion Image</h2>
+            <img id="lionImage" src="https://images.pexels.com/photos/2220336/pexels-photo-2220336.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Lion Image">
+            <p class="description">
+               
+            </p>
+        </div>
+    </section>
+
+    <footer>
+        <p id="footerText">Created by Sanjana Aitham | Date: 12:20pm | Course: ITC 505</p>
+    </footer>
+
+    <script>
+        // Array of VIBGYOR colors
+        const vibgyorColors = [
+            "#8A2BE2", // Violet
+            "#4B0082", // Indigo
+            "#0000FF", // Blue
+            "#008000", // Green
+            "#FFFF00", // Yellow
+            "#FFA500", // Orange
+            "#FF0000"  // Red
+        ];
+
+        let currentColorIndex = 0; // Start with the first color
+
+        // Function to change "Click Me" button color when clicked
+        function changeColor() {
+            var button = document.getElementById('colorButton');
+            button.style.backgroundColor = vibgyorColors[currentColorIndex];
+
+            // Move to the next color in the VIBGYOR sequence
+            currentColorIndex = (currentColorIndex + 1) % vibgyorColors.length;
+        }
+
+        // Function to handle form submission and check input
+        function submitText() {
+            var userInput = document.getElementById('userInput').value;
+
+            if (userInput.trim() === "") {
+                alert("Please enter some text before submitting!");
+            } else {
+                alert("You submitted: " + userInput);
+            }
+
+            // Change the submit button color in VIBGYOR sequence
+            changeSubmitButtonColor();
+        }
+
+        // Function to change the submit button's color in VIBGYOR sequence
+        let submitButtonColorIndex = 0;
+        function changeSubmitButtonColor() {
+            const submitButton = document.getElementById('submitButton');
+            submitButton.style.backgroundColor = vibgyorColors[submitButtonColorIndex];
+
+            // Cycle through VIBGYOR colors
+            submitButtonColorIndex = (submitButtonColorIndex + 1) % vibgyorColors.length;
+        }
+
+        // Function to change footer text color in VIBGYOR sequence
+        let footerColorIndex = 0;
+        function changeFooterColor() {
+            const footerText = document.getElementById('footerText');
+            footerText.style.color = vibgyorColors[footerColorIndex];
+
+            // Cycle through VIBGYOR colors
+            footerColorIndex = (footerColorIndex + 1) % vibgyorColors.length;
+        }
+
+        // Change footer text color every 1 second
+        setInterval(changeFooterColor, 1000);
+    </script>
+</body>
+</html>
+
